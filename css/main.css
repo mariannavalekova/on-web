@@ -309,6 +309,59 @@ a:hover .arrow { transform: translateX(6px); }
 .nav__toggle svg,
 .nav__search-toggle svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; }
 
+/* vyhľadávanie v menu — tlačidlo s lupou / krížikom a vysúvací panel */
+.nav .container { position: relative; }
+.nav__search-toggle {
+  justify-content: center;
+  width: 52px;
+  margin-right: -15px;            /* ikona zostáva zarovnaná s pravým okrajom obsahu */
+  padding: 0;
+  transition: background-color .2s;
+}
+.nav__search-toggle:hover,
+.nav__search-toggle[aria-expanded="true"] { background: var(--on-blue-dark); }
+.nav__search-toggle .icon-close,
+.nav__search-toggle[aria-expanded="true"] .icon-search { display: none; }
+.nav__search-toggle[aria-expanded="true"] .icon-close { display: block; }
+
+.nav-search {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: var(--gutter);
+  width: min(380px, calc(100% - 2 * var(--gutter)));
+  padding: 12px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(17, 20, 23, .08), 0 12px 32px rgba(17, 20, 23, .18);
+}
+.nav-search__form { display: flex; }
+.nav-search__form input {
+  flex: 1;
+  min-width: 0;
+  height: 44px;
+  padding: 0 .9rem;
+  border: 1px solid var(--line);
+  border-right: 0;
+  border-radius: 0;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+}
+.nav-search__form input:focus { outline: none; border-color: var(--on-blue); }
+.nav-search__form button {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: var(--on-blue);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color .2s;
+}
+.nav-search__form button:hover { background: var(--on-blue-dark); }
+.nav-search__form svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+
 .nav__menu {
   display: none;
   margin: 0; padding: 0;
@@ -1236,7 +1289,6 @@ a:hover .arrow { transform: translateX(6px); }
     font-size: .8125rem;
     letter-spacing: .05em;
   }
-  .nav__search-toggle { padding: 0; }
 }
 
 /* zmenšený pohyb */
