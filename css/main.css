@@ -847,6 +847,7 @@ a:hover .arrow { transform: translateX(6px); }
   text-transform: uppercase;
 }
 .footer__links li + li { margin-top: .45rem; }
+.footer address { margin-bottom: .9rem; font-style: normal; line-height: 1.6; }
 
 /* rubriky — rovnaký zoznam ako „Časopis“, rozdelený do dvoch stĺpcov */
 .footer__links--cols {
@@ -1189,6 +1190,8 @@ a:hover .arrow { transform: translateX(6px); }
   .grid--2,
   .tips { grid-template-columns: repeat(2, 1fr); }
   .masthead__date { display: block; }
+  .footer__top { grid-template-columns: repeat(2, auto); justify-content: space-between; }
+  .footer__brand { grid-column: 1 / -1; }
   .footer__nav { grid-template-columns: auto auto; column-gap: clamp(2.5rem, 7vw, 6rem); }
 }
 
@@ -1209,8 +1212,11 @@ a:hover .arrow { transform: translateX(6px); }
     line-height: .82;
   }
   .split { grid-template-columns: minmax(0, 1fr) 340px; }
-  /* stĺpce podľa obsahu, rozložené na celú šírku — rubriky končia na pravom okraji */
-  .footer__top { grid-template-columns: minmax(0, 24rem) auto; justify-content: space-between; }
+  /* štyri stĺpce (značka, Časopis, Rubriky, Kontakt) s rovnakými medzerami;
+     .footer__nav sa „rozpustí“, aby jeho stĺpce boli priamo v mriežke */
+  .footer__top { grid-template-columns: repeat(4, auto); justify-content: space-between; }
+  .footer__brand { grid-column: auto; max-width: 20rem; }
+  .footer__nav { display: contents; }
 }
 
 /* Desktopové menu — rubriky rozložené na šírku obsahu: prvá záložka začína
