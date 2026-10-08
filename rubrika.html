@@ -55,16 +55,16 @@
       </button>
       <ul class="nav__menu" id="menu">
         <li><a href="index.html">Úvod</a></li>
-        <li><a href="#">UKF Life</a></li>
-        <li><a href="rubrika.html" aria-current="page">Zo školstva</a></li>
-        <li><a href="#">Rozhovory</a></li>
-        <li><a href="#">Šport</a></li>
-        <li><a href="#">Medzi riadkami</a></li>
-        <li><a href="#">ON predstavuje</a></li>
-        <li><a href="#">Rande s Nitrou</a></li>
-        <li><a href="#">Kultúra a umenie</a></li>
-        <li><a href="#">EKO</a></li>
-        <li><a href="#">Názory</a></li>
+        <li><a href="rubrika.html?r=ukf-life">UKF Life</a></li>
+        <li><a href="rubrika.html?r=zo-skolstva" aria-current="page">Zo školstva</a></li>
+        <li><a href="rubrika.html?r=rozhovory">Rozhovory</a></li>
+        <li><a href="rubrika.html?r=sport">Šport</a></li>
+        <li><a href="rubrika.html?r=medzi-riadkami">Medzi riadkami</a></li>
+        <li><a href="rubrika.html?r=on-predstavuje">ON predstavuje</a></li>
+        <li><a href="rubrika.html?r=rande-s-nitrou">Rande s Nitrou</a></li>
+        <li><a href="rubrika.html?r=kultura-a-umenie">Kultúra a umenie</a></li>
+        <li><a href="rubrika.html?r=eko">EKO</a></li>
+        <li><a href="rubrika.html?r=nazory">Názory</a></li>
       </ul>
       <button class="nav__search-toggle" type="button" aria-label="Vyhľadať">
         <svg aria-hidden="true"><use href="#i-search"/></svg>
@@ -184,16 +184,16 @@
         <section class="widget">
           <h2 class="widget__title">Rubriky</h2>
           <div class="rubrics">
-            <a class="tab" href="#">UKF Life</a>
-            <a class="tab tab--blue" href="rubrika.html" aria-current="page">Zo školstva</a>
-            <a class="tab" href="#">Rozhovory</a>
-            <a class="tab" href="#">Šport</a>
-            <a class="tab" href="#">Medzi riadkami</a>
-            <a class="tab" href="#">On predstavuje</a>
-            <a class="tab" href="#">Rande s Nitrou</a>
-            <a class="tab" href="#">Kultúra a umenie</a>
-            <a class="tab" href="#">Eko</a>
-            <a class="tab" href="#">Názory</a>
+            <a class="tab" href="rubrika.html?r=ukf-life">UKF Life</a>
+            <a class="tab tab--blue" href="rubrika.html?r=zo-skolstva" aria-current="page">Zo školstva</a>
+            <a class="tab" href="rubrika.html?r=rozhovory">Rozhovory</a>
+            <a class="tab" href="rubrika.html?r=sport">Šport</a>
+            <a class="tab" href="rubrika.html?r=medzi-riadkami">Medzi riadkami</a>
+            <a class="tab" href="rubrika.html?r=on-predstavuje">On predstavuje</a>
+            <a class="tab" href="rubrika.html?r=rande-s-nitrou">Rande s Nitrou</a>
+            <a class="tab" href="rubrika.html?r=kultura-a-umenie">Kultúra a umenie</a>
+            <a class="tab" href="rubrika.html?r=eko">Eko</a>
+            <a class="tab" href="rubrika.html?r=nazory">Názory</a>
           </div>
         </section>
 
@@ -258,16 +258,16 @@
       <div>
         <h3>Rubriky</h3>
         <ul class="footer__links footer__links--cols">
-          <li><a href="#">UKF Life</a></li>
-          <li><a href="rubrika.html">Zo školstva</a></li>
-          <li><a href="#">Rozhovory</a></li>
-          <li><a href="#">Šport</a></li>
-          <li><a href="#">Medzi riadkami</a></li>
-          <li><a href="#">On predstavuje</a></li>
-          <li><a href="#">Rande s Nitrou</a></li>
-          <li><a href="#">Kultúra a umenie</a></li>
-          <li><a href="#">Eko</a></li>
-          <li><a href="#">Názory</a></li>
+          <li><a href="rubrika.html?r=ukf-life">UKF Life</a></li>
+          <li><a href="rubrika.html?r=zo-skolstva">Zo školstva</a></li>
+          <li><a href="rubrika.html?r=rozhovory">Rozhovory</a></li>
+          <li><a href="rubrika.html?r=sport">Šport</a></li>
+          <li><a href="rubrika.html?r=medzi-riadkami">Medzi riadkami</a></li>
+          <li><a href="rubrika.html?r=on-predstavuje">On predstavuje</a></li>
+          <li><a href="rubrika.html?r=rande-s-nitrou">Rande s Nitrou</a></li>
+          <li><a href="rubrika.html?r=kultura-a-umenie">Kultúra a umenie</a></li>
+          <li><a href="rubrika.html?r=eko">Eko</a></li>
+          <li><a href="rubrika.html?r=nazory">Názory</a></li>
         </ul>
       </div>
     </nav>
@@ -308,6 +308,30 @@
   // dnešný dátum
   document.getElementById('dnes').textContent =
     new Date().toLocaleDateString('sk-SK', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+</script>
+<script>
+  // Jedna šablóna pre všetky rubriky: názov sa berie z parametra ?r= v adrese
+  // (napr. rubrika.html?r=sport) podľa textu odkazu na danú rubriku v menu.
+  (() => {
+    const slug = new URLSearchParams(location.search).get('r') || 'zo-skolstva';
+    const links = document.querySelectorAll(`a[href="rubrika.html?r=${CSS.escape(slug)}"]`);
+    if (!links.length) return;
+    const name = links[0].textContent.trim();
+    document.getElementById('h-rubrika').textContent = name;
+    document.title = `${name} – Občas Nečas`;
+
+    document.querySelectorAll('.nav__menu a[aria-current], .rubrics a[aria-current]').forEach(a => {
+      a.removeAttribute('aria-current');
+      a.classList.remove('tab--blue');
+    });
+    links.forEach(a => {
+      if (a.closest('.nav__menu')) a.setAttribute('aria-current', 'page');
+      if (a.closest('.rubrics')) {
+        a.setAttribute('aria-current', 'page');
+        a.classList.add('tab--blue');
+      }
+    });
+  })();
 </script>
 </body>
 </html>
