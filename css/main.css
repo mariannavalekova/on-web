@@ -661,6 +661,7 @@ a:hover .arrow { transform: translateX(6px); }
 /* ---------- 8. Dvojstĺpec: obsah + bočný panel ---------- */
 .split {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);   /* na mobile stĺpec nesmie rásť podľa obsahu */
   gap: calc(var(--gap) * 1.5);
 }
 
@@ -976,8 +977,8 @@ a:hover .arrow { transform: translateX(6px); }
 }
 .info-list > div {
   display: grid;
-  grid-template-columns: 8.5rem 1fr;
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr);   /* mobil: štítok nad hodnotou */
+  gap: .2rem 1rem;
   padding: .85rem 0;
   border-bottom: 1px solid var(--line);
 }
@@ -990,7 +991,7 @@ a:hover .arrow { transform: translateX(6px); }
   letter-spacing: .08em;
   text-transform: uppercase;
 }
-.info-list dd { margin: 0; line-height: 1.5; }
+.info-list dd { margin: 0; line-height: 1.5; overflow-wrap: anywhere; }
 
 /* ocenenia — rok veľkým modrým písmom, ako čísla v Najčítanejšie */
 .awards > li {
@@ -1020,7 +1021,7 @@ a:hover .arrow { transform: translateX(6px); }
 /* redakcia — karty členov */
 .team {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
   gap: 12px;
 }
 .member {
@@ -1033,7 +1034,7 @@ a:hover .arrow { transform: translateX(6px); }
   background: #fff;
 }
 /* vedenie s e-mailmi — širšie karty, aby sa adresy nelámali */
-.team--lead { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.team--lead { grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); }
 .member__body {
   display: flex;
   flex-direction: column;
@@ -1061,7 +1062,7 @@ a:hover .arrow { transform: translateX(6px); }
 /* partneri — karty ako v redakcii: logo, názov a modrá linka dole */
 .partners {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(170px, 100%), 1fr));
   gap: 12px;
 }
 .partners li > * {
@@ -1094,7 +1095,7 @@ a:hover .arrow { transform: translateX(6px); }
 /* archív — obálky čísel, staršie čísla ako štítky */
 .issues {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(140px, 100%), 1fr));
   gap: 1.25rem var(--gap);
 }
 .issues a { display: block; color: var(--ink); }
@@ -1181,6 +1182,7 @@ a:hover .arrow { transform: translateX(6px); }
 .form__check input { width: 18px; height: 18px; margin: .1rem 0 0; flex: none; accent-color: var(--on-blue); }
 .form .btn { justify-self: start; }
 @media (min-width: 600px) {
+  .info-list > div { grid-template-columns: 8.5rem minmax(0, 1fr); }
   .form__row { grid-template-columns: 1fr 1fr; }
 }
 
